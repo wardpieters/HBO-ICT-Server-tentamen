@@ -1,0 +1,45 @@
+@using System.Net.Http
+@model IEnumerable<SamenGamen.Models.Gamevoorstel>
+
+@{
+    ViewData["Title"] = "Overzicht";
+}
+
+@if (ViewBag.SessieData == null)
+{
+    <h1>Er is geen sessie (meer)!</h1>
+    return;
+}
+
+<h1>Overzicht (sessie van @ViewBag.SessieData.Naam)</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Beschrijving)
+            </th>
+            <th>
+                Aantal aanmeldingen
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aanmeldingen.Count)
+            </td>
+            <td>
+                <a asp-route-id="@item.Id" asp-action="AddCurrentPlayerToGame">Aanmelden</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<a asp-action="CreateSpecial" asp-controller="Gamevoorstellen">Nieuw gamevoorstel maken</a>

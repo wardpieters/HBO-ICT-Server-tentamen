@@ -1,0 +1,1 @@
+Er wordt gebruik gemaakt van SQLite i.v.m. macOS.
